@@ -4,6 +4,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import FavouritePetScreen from './app/screens/FavouriteScreen';
 import PetListingScreen from './app/screens/PetListingScreen';
+import store from './store';
+import { Provider } from 'react-redux';
 
 
 const Tab = createBottomTabNavigator();
@@ -47,9 +49,11 @@ const TabNavigator = () => (
 
 export default function App() {
   return (
-    <NavigationContainer>
-        <TabNavigator />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+          <TabNavigator />
+      </NavigationContainer>
+    </Provider>
   );
 }
 

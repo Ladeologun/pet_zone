@@ -13,7 +13,7 @@ const FavouritePetCard: React.FC<CardProps> = ({image,name}) => {
         <View style={styles.container}>
             <Image style={styles.image} source={{uri:image}} />
             <View style={styles.detailscontainer}>
-                <AppText style={styles.text}>{name}</AppText>
+                <AppText style={styles.text} words={name} />
                 <MaterialCommunityIcons name="heart"  color="red" size={26} onPress={()=>console.log("LIKED")} />
             </View>
         </View>

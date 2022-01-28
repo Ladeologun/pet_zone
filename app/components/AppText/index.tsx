@@ -2,14 +2,14 @@ import React from 'react';
 import { Text,StyleSheet,Platform } from 'react-native';
 
 interface TextProps {
-    children:React.ReactNode,
+    words:string|undefined
     style?:{[key:string]:any}
 }
 
-const AppText: React.FC<TextProps> = ({children,style})=>{
+const AppText: React.FC<TextProps> = ({words,style})=>{
     return (
         <Text style={[styles.text,style]}>
-            {children}
+            {words}
         </Text>
     );
 }

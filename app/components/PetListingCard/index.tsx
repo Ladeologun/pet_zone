@@ -6,7 +6,7 @@ import AppText from '../AppText';
 
 interface CardProps{
     image: string;
-    name: string
+    name?: string
 }
 
 const PetListingCard: React.FC<CardProps> = ({image,name})=>{
@@ -16,7 +16,8 @@ const PetListingCard: React.FC<CardProps> = ({image,name})=>{
                 <View style={styles.imagecontainer}>
                     <Image style={{borderRadius:10}}  resizeMode='cover' source={{uri:image,height:50,width:50}} />
                 </View>
-                <AppText style={styles.text}>{name}</AppText>
+                <AppText style={styles.text} words={name} />
+
             </View>
             <SimpleLineIcons name="heart"  color="#212227" size={24} onPress={()=>console.log("LIKED")} />
         </View>

@@ -10,7 +10,7 @@ interface HeaderProps {
 const Header: React.FC<HeaderProps> = ({description})=>{
     return (
         <View style={styles.container}>
-            <AppText style={styles.text}>{description}</AppText>
+            <AppText style={styles.text} words={description} />
         </View>
     );
 }

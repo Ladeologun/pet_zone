@@ -5,7 +5,7 @@ interface Cat {
     image: string
   }
 
-export const getMoviesbyId = async (item:Cat) => {
+export const getCatsByName = async (item:Cat) => {
     try {
       const jsonValue = await AsyncStorage.getItem("catsilike")
       const value = jsonValue != null ? JSON.parse(jsonValue) : null;

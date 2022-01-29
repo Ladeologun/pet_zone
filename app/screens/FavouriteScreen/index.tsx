@@ -19,14 +19,15 @@ const FavouritePetScreen: React.FC = (props)=>{
         <Screen>
             <View style={styles.container}>
                 <Header description="Cats I Like"/>
-                <FlatList
+                <FlatList 
                     data={CatList}
                     keyExtractor={(item,index) => index.toString()}
                     key={'_'}
                     numColumns={2}
+                    columnWrapperStyle = {{justifyContent:"space-between"}}
                     renderItem={({item})=><FavouritePetCard  image={item.image} name={item.name}/>}
             />
-            {!CatList.length && <Text style={styles.emptylist}>YOU DO NOT HAVE ANY MOVIE IN YOUR LIST</Text>}
+            {!CatList.length && <Text style={styles.emptylist}>YOU DO NOT HAVE ANY CAT IN YOUR LIST</Text>}
             </View>
         </Screen>
         }
@@ -46,9 +47,9 @@ const styles = StyleSheet.create({
         justifyContent:"space-between"
     },
     emptylist:{
-        color:"#fff",
+        color:"black",
         position:"absolute",
-        top:120,
+        top:80,
         left:40,
         fontFamily:"Avenir",
         fontWeight:"bold"

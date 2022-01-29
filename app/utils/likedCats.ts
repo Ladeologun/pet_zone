@@ -7,6 +7,7 @@ interface Cat {
 
 export const getCatsByName = async (item:Cat) => {
     try {
+        console.log("here")
       const jsonValue = await AsyncStorage.getItem("catsilike")
       const value = jsonValue != null ? JSON.parse(jsonValue) : null;
       if (value){
@@ -20,5 +21,6 @@ export const getCatsByName = async (item:Cat) => {
       }
     } catch(e) {
       console.log(e)
+      console.log("did not work")
     }
   }

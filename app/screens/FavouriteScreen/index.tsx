@@ -1,46 +1,36 @@
 import React from 'react';
-import { View,StyleSheet} from 'react-native';
+import { View,StyleSheet, FlatList, Text} from 'react-native';
 import FavouritePetCard from '../../components/FavouritePetCard';
 import Header from '../../components/Header';
 import Screen from '../../components/Screen';
+import { getCats } from '../../utils/cache';
 
 const FavouritePetScreen: React.FC = (props)=>{
-    return (
+    const [CatList,SetCatList] = React.useState<any>([])
+
+    React.useEffect(()=>{
+        const fetchcats = async ()=>{
+            let mycats = await getCats("catsilike")
+            SetCatList(mycats)
+        }
+        fetchcats()
+    },[CatList])
+    return (<>{CatList &&
         <Screen>
             <View style={styles.container}>
                 <Header description="Cats I Like"/>
-                <View style={styles.trial}>
-                    <FavouritePetCard 
-                        image="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/why-cats-are-best-pets-1559241235.jpg?crop=0.586xw:0.880xh;0.0684xw,0.0611xh&resize=640:*"
-                        name="Abyssinian"
-                    />
-                    <FavouritePetCard 
-                        image="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/why-cats-are-best-pets-1559241235.jpg?crop=0.586xw:0.880xh;0.0684xw,0.0611xh&resize=640:*"
-                        name="Abyssinian"
-                    />
-                </View>
-                <View style={styles.trial}>
-                    <FavouritePetCard 
-                        image="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/why-cats-are-best-pets-1559241235.jpg?crop=0.586xw:0.880xh;0.0684xw,0.0611xh&resize=640:*"
-                        name="Abyssinian"
-                    />
-                    <FavouritePetCard 
-                        image="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-f3860ceb0ef19643c335cb34df3fa1de166e2761-s1100-c50.jpg"
-                        name="Abyssinian"
-                    />
-                </View>
-                <View style={styles.trial}>
-                    <FavouritePetCard 
-                        image="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/why-cats-are-best-pets-1559241235.jpg?crop=0.586xw:0.880xh;0.0684xw,0.0611xh&resize=640:*"
-                        name="Abyssinian"
-                    />
-                    <FavouritePetCard 
-                        image="https://media.npr.org/assets/img/2021/08/11/gettyimages-1279899488_wide-f3860ceb0ef19643c335cb34df3fa1de166e2761-s1100-c50.jpg"
-                        name="Abyssinian"
-                    />
-                </View>
+                <FlatList
+                    data={CatList}
+                    keyExtractor={(item,index) => index.toString()}
+                    key={'_'}
+                    numColumns={2}
+                    renderItem={({item})=><FavouritePetCard  image={item.image} name={item.name}/>}
+            />
+            {!CatList.length && <Text style={styles.emptylist}>YOU DO NOT HAVE ANY MOVIE IN YOUR LIST</Text>}
             </View>
         </Screen>
+        }
+    </>
     );
 }
 
@@ -54,6 +44,14 @@ const styles = StyleSheet.create({
     trial: {
         flexDirection:"row",
         justifyContent:"space-between"
+    },
+    emptylist:{
+        color:"#fff",
+        position:"absolute",
+        top:120,
+        left:40,
+        fontFamily:"Avenir",
+        fontWeight:"bold"
     }
 })
 

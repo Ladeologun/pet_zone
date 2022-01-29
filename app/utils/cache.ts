@@ -16,7 +16,7 @@ export const getCats = async (storage_key:string) => {
   }
 
 
-export const store = async (storage_key:string,value:Cat) => {
+export const asyncstore = async (storage_key:string,value:Cat) => {
     try{
         const favcats = await getCats(storage_key)
     
@@ -29,8 +29,8 @@ export const store = async (storage_key:string,value:Cat) => {
             await AsyncStorage.removeItem(storage_key)
             await AsyncStorage.setItem(storage_key, jsonValue)
         }else{
-            const updatedmovie = [...favcats,value]
-            const jsonValue = JSON.stringify(updatedmovie)
+            const updatedCats = [...favcats,value]
+            const jsonValue = JSON.stringify(updatedCats)
             await AsyncStorage.setItem(storage_key, jsonValue)
         }
 
